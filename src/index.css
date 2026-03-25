@@ -1,0 +1,221 @@
+:root {
+  --bg-dark: #0a0a0c;
+  --bg-sidebar: #121216;
+  --bg-card: #1c1c22;
+  --accent-blue: #3b82f6;
+  --accent-purple: #8b5cf6;
+  --accent-orange: #f59e0b;
+  --accent-red: #ef4444;
+  --accent-green: #10b981;
+  --accent-teal: #14b8a6;
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --border: #2d2d35;
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.app-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 380px;
+  height: 100%;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: 320px;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.sidebar-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.sidebar-footer {
+  padding: 24px;
+  border-top: 1px solid var(--border);
+}
+
+/* Graph Container */
+.graph-container {
+  flex: 1;
+  position: relative;
+  background-color: var(--bg-dark);
+  height: 100%;
+  width: 100%;
+}
+
+/* Card Styling */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.card-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Chat Interface Overlay */
+.chat-overlay {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 400px;
+  max-height: 500px;
+  background-color: rgba(18, 18, 22, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  z-index: 20;
+  transition: all 0.3s ease;
+
+  @media (max-width: 1024px) {
+    width: 350px;
+    right: 20px;
+  }
+
+  @media (max-width: 768px) {
+    width: calc(100% - 40px);
+    right: 20px;
+    left: 20px;
+    bottom: 20px;
+    max-height: 40vh;
+  }
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message {
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  max-width: 85%;
+}
+
+.message.user {
+  background-color: var(--accent-blue);
+  color: white;
+  align-self: flex-end;
+}
+
+.message.ai {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  align-self: flex-start;
+}
+
+.chat-input-container {
+  padding: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.chat-input {
+  width: 100%;
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input:focus {
+  border-color: var(--accent-blue);
+}
+
+/* Node Colors */
+.node-S { color: var(--accent-blue); }
+.node-D { color: var(--accent-purple); }
+.node-B { color: var(--accent-orange); }
+.node-J { color: var(--accent-red); }
+.node-P { color: var(--accent-green); }
+.node-Partner { color: var(--text-secondary); }
+.node-Product { color: var(--accent-teal); }
+
+/* Animations */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.selected-node {
+  animation: pulse 2s infinite;
+}
